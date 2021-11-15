@@ -4,10 +4,10 @@ import {mockedUsers, User} from "../model/user";
 
 class UserController {
 
-    private readonly users: User[] = []
+    private users: User[] = []
 
     constructor() {
-        this.users = mockedUsers();
+        mockedUsers().then(users => this.users = users);
     }
 
     getUsers = (req: Request, res: Response) => {

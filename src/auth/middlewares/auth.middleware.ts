@@ -13,9 +13,7 @@ class AuthMiddleware {
         if (req.body && req.body.email && req.body.password) {
             next();
         } else {
-            res.status(400).send({
-                error: `Missing required fields email and password`,
-            });
+            res.status(400).send({error: `Missing required fields email and password`});
         }
     }
 
@@ -41,11 +39,13 @@ class AuthMiddleware {
 
         if (!user) {
             res.status(400).send({error: `User does not exists!`});
+            return;
         }
 
         const comparedPassword = await bcrypt.compare(req.body.password, user.password!);
         if (!comparedPassword) {
             res.status(400).send({error: `User password does not match`});
+            return;
         }
 
         next();
@@ -60,18 +60,21 @@ class AuthMiddleware {
 
         if (!token) {
             res.status(401).send({error: `Token is not valid! User is not authorized!`});
+            return;
         }
 
         const decodedToken: any = jwt.decode(token);
 
         if (!decodedToken) {
             res.status(401).send({error: `Token is not valid! User is not authorized!`});
+            return;
         }
 
-        const user = UserController.getUserByEmail(decodedToken?.email);
+        const user = UserController.getUserByEmail(decodedToken.email);
 
         if (!user) {
             res.status(401).send({error: `Token is not valid! User is not authorized!`});
+            return;
         }
 
         next();

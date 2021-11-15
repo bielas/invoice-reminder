@@ -27,15 +27,15 @@ export class User {
     }
 }
 
-export const mockedUsers = () => {
-    const password = hashPassword('admin');
+export const mockedUsers = async (): Promise<User[]> => {
+    const password = await hashPassword('admin');
 
     return [
-        User.mock('Michał', 'Bielawski', 'admin@mail.com', password, new Date()),
-        User.mock('Mariusz', 'Bielawski', 'mariusz.bielawski@mail.com', password, new Date())
+        User.mock('Michał', 'Doe', 'admin@mail.com', password, new Date()),
+        User.mock('Mariusz', 'Doe', 'mariusz.doe@mail.com', password, new Date())
     ]
 }
 
-const hashPassword = (password: string): string => {
-    return bcrypt.hashSync(password, 10);
+const hashPassword = (password: string): Promise<string> => {
+    return bcrypt.hash(password, 10);
 }
