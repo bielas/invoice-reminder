@@ -63,7 +63,8 @@ class AuthMiddleware {
             return;
         }
 
-        const decodedToken: any = jwt.decode(token);
+        const splittedToken = token.split('Bearer ')[1];
+        const decodedToken: any = jwt.decode(splittedToken);
 
         if (!decodedToken) {
             res.status(401).send({error: `Token is not valid! User is not authorized!`});

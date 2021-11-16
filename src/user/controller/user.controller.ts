@@ -20,6 +20,11 @@ class UserController {
     getUser = (req: Request, res: Response) => {
         const {id} = req.params;
         const user: User | undefined = this.users.find(user => user.id === id);
+
+        if (!user) {
+            res.status(404).send({error: `User with Id: ${id} not found!`});
+        }
+
         delete user?.password;
         res.send(user);
     }
