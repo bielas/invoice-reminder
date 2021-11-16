@@ -26,21 +26,22 @@ export default class AuthRoute {
          *   post:
          *     tags: [Authorization]
          *     summary: Get token
-         *     parameters:
-         *       - in: body
-         *         name: id
-         *         required: true
-         *         description: Get token
-         *         schema:
-         *           type: object
-         *           required:
-         *              - email
-         *              - password
-         *           properties:
-         *              email:
-         *                  type: string
-         *              password:
-         *                  type: string
+         *     requestBody:
+         *      required: true
+         *      content:
+         *          application/json:
+         *              schema:
+         *                  type: object
+         *                  required:
+         *                      - email
+         *                      - password
+         *                  properties:
+         *                      email:
+         *                          type: string
+         *                          example: admin@mail.com
+         *                      password:
+         *                          type: string
+         *                          example: admin
          *     responses:
          *       200:
          *          description: A successful response

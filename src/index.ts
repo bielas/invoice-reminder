@@ -17,7 +17,7 @@ app.use(express.json());
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
-app.use('', (req, res) => res.redirect('/api-docs'))
+
 
 app.use('/auth', new AuthRoute().router);
 app.use('/users', [
@@ -25,4 +25,11 @@ app.use('/users', [
     new UserRouter().router
 ]);
 
+// app.use('', (req, res) => {
+//     res.writeHead(200, {'Content-Type': 'text/html'});
+//     const file = fs.createReadStream('index.html');
+//     file.pipe(res);
+// })
+
+app.use('', (req, res) => res.redirect('/api-docs'))
 app.listen(PORT, () => console.log(`Run at: ${new Date()}. Server running on port: http://localhost:${PORT}`))

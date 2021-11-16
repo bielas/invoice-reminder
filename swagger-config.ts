@@ -1,3 +1,4 @@
+//https://blog.logrocket.com/documenting-your-express-api-with-swagger/
 export const swaggerOptions = {
     swaggerDefinition: {
         openapi: '3.0.1',
