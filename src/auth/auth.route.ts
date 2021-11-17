@@ -20,32 +20,6 @@ export default class AuthRoute {
     }
 
     private initRoutes(): void {
-        /**
-         * @swagger
-         * /auth/login:
-         *   post:
-         *     tags: [Authorization]
-         *     summary: Get token
-         *     requestBody:
-         *      required: true
-         *      content:
-         *          application/json:
-         *              schema:
-         *                  type: object
-         *                  required:
-         *                      - email
-         *                      - password
-         *                  properties:
-         *                      email:
-         *                          type: string
-         *                          example: admin@mail.com
-         *                      password:
-         *                          type: string
-         *                          example: admin
-         *     responses:
-         *       200:
-         *          description: A successful response
-         */
         this.router.post('/login', [
             AuthMiddleware.validateRequiredUserBodyFields,
             AuthMiddleware.validateUserEmailExists,

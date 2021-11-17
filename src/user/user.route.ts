@@ -18,40 +18,7 @@ export default class UserRoute {
     }
 
     private initRoutes(): void {
-        /**
-         * @swagger
-         * /users:
-         *  get:
-         *    security:
-         *      - bearerAuth: []
-         *    tags: [Users]
-         *    summary: Use to request all users
-         *    responses:
-         *      '200':
-         *        description: A successful response
-         */
         this.router.get('/', UserController.getUsers)
-        /**
-         * @swagger
-         * /users/{id}:
-         *   get:
-         *     security:
-         *       - bearerAuth: []
-         *     tags: [Users]
-         *     summary: Use to request user by ID
-         *     parameters:
-         *       - in: path
-         *         name: id
-         *         required: true
-         *         description: Character ID of the user to retrieve.
-         *         schema:
-         *           type: string
-         *     responses:
-         *       200:
-         *          description: A successful response
-         *       404:
-         *          description: Not found
-         */
         this.router.get('/:id', UserController.getUser)
         this.router.delete('/:id', UserController.deleteUser)
         this.router.post('/', UserController.createUser)

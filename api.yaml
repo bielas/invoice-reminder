@@ -1,0 +1,57 @@
+#  https://www.codementor.io/@peteradeoye/splitting-your-swagger-spec-into-multiple-files-in-a-node-project-nuprc0mej
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Authorization
+      summary: Get token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  example: admin@mail.com
+                password:
+                  type: string
+                  example: admin
+      responses:
+        200:
+          description: A succesful response
+  /users:
+    get:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - Users
+      summary: Use to request all users
+      responses:
+        200:
+          description:
+            A succesful reponse
+  /users/{id}:
+    get:
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - Users
+      summary: Use to request user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Character ID of the user to retrieve
+          type: string
+      responses:
+        200:
+          description:
+            A succesful response
+        404:
+          description:
+            Not found
